@@ -23,10 +23,28 @@ def main():
     n = int(input())
     data = list(map(int, input().split()))
     assert len(data) == n
-    swaps = build_heap(data)
-    print(len(swaps))
-    for i, j in swaps:
-        print(i, j)
+    # Determine input type
+    input_type = input()
+    if "i" in input_type:
+        pass
+    elif "f" in input_type:
+        while True:
+            try:
+                file_name = "/tests" + input()
+                with open(file_name, 'r', encoding="utf-8") as f:
+                    n = int(f.readline().strip())
+                    data = list(map(int, f.readline().strip().split()))
+                    assert len(data) == n
+                    swaps = build_heap(data)
+                    print(len(swaps))
+                    for i, j in swaps:
+                        print(i, j)
+                    break
+            except FileNotFoundError:
+                print("File not found. Try again.")
+    else:
+        print("Invalid input type. Try again.")
+
 
 if __name__ == "__main__":
     main()
