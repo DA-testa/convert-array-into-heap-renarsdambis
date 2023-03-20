@@ -24,7 +24,6 @@ def main():
     data = list(map(int, input().split()))
     assert len(data) == n
 
-    # Prompt the user to enter the input type
     input_type = input("Enter the input type (i or f): ")
 
     if "i" in input_type:
