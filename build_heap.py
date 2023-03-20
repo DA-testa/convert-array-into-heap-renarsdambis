@@ -1,34 +1,29 @@
 def build_heap(data):
-    swaps = []
     n = len(data)
-
-    # start from the middle of the array and iterate towards the beginning
+    swaps = []
     for i in range(n // 2, -1, -1):
-        j = i
-        # keep swapping until the element is smaller than both its children or it becomes a leaf node
-        while j * 2 + 1 < n:
-            left = j * 2 + 1
-            right = j * 2 + 2 if j * 2 + 2 < n else left
-            if data[left] < data[right]:
-                smallest = left
-            else:
-                smallest = right
-            if data[j] > data[smallest]:
-                data[j], data[smallest] = data[smallest], data[j]
-                swaps.append((j, smallest))
-                j = smallest
-            else:
-                break
-
+        sift_down(i, data, swaps)
     return swaps
+
+def sift_down(i, data, swaps):
+    n = len(data)
+    min_index = i
+    l = 2 * i + 1
+    if l < n and data[l] < data[min_index]:
+        min_index = l
+    r = 2 * i + 2
+    if r < n and data[r] < data[min_index]:
+        min_index = r
+    if i != min_index:
+        swaps.append((i, min_index))
+        data[i], data[min_index] = data[min_index], data[i]
+        sift_down(min_index, data, swaps)
 
 def main():
     n = int(input())
     data = list(map(int, input().split()))
     assert len(data) == n
-
     swaps = build_heap(data)
-
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
