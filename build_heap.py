@@ -45,9 +45,9 @@ def main():
                         print(i, j)
                     break
             except FileNotFoundError:
-                print("File not found. Try again.")
+                print("File not found. Please enter a valid file name.")
     else:
-        print("Invalid input type. Try again.")
+        print("Invalid input type. Please enter 'i' or 'f'.")
 
 if __name__ == "__main__":
     main()
