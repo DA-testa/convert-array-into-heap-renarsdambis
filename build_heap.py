@@ -23,14 +23,19 @@ def main():
     n = int(input())
     data = list(map(int, input().split()))
     assert len(data) == n
-    # Determine input type
-    input_type = input()
+
+    # Prompt the user to enter the input type
+    input_type = input("Enter the input type (i or f): ")
+
     if "i" in input_type:
-        pass
+        swaps = build_heap(data)
+        print(len(swaps))
+        for i, j in swaps:
+            print(i, j)
     elif "f" in input_type:
         while True:
             try:
-                file_name = "/tests" + input()
+                file_name = "tests/" + input("Enter the file name: ")
                 with open(file_name, 'r', encoding="utf-8") as f:
                     n = int(f.readline().strip())
                     data = list(map(int, f.readline().strip().split()))
@@ -44,7 +49,6 @@ def main():
                 print("File not found. Try again.")
     else:
         print("Invalid input type. Try again.")
-
 
 if __name__ == "__main__":
     main()
