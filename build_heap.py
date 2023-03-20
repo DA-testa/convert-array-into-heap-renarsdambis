@@ -1,9 +1,10 @@
 def build_heap(data):
-    n = len(data)
     swaps = []
+    n = len(data)
     for i in range(n // 2, -1, -1):
         sift_down(i, data, swaps)
     return swaps
+
 
 def sift_down(i, data, swaps):
     n = len(data)
@@ -19,35 +20,35 @@ def sift_down(i, data, swaps):
         data[i], data[min_index] = data[min_index], data[i]
         sift_down(min_index, data, swaps)
 
+
 def main():
-    n = int(input())
-    data = list(map(int, input().split()))
-    assert len(data) == n
-
     input_type = input("Enter the input type (i or f): ")
-
-    if "i" in input_type:
+    if input_type == "i":
+        n = int(input("Enter the number of elements: "))
+        data = list(map(int, input("Enter the elements: ").split()))
+        assert len(data) == n
         swaps = build_heap(data)
-        print(len(swaps))
+        print("Number of swaps:", len(swaps))
         for i, j in swaps:
             print(i, j)
-    elif "f" in input_type:
+    elif input_type == "f":
         while True:
             try:
-                file_name = "tests/" + input("Enter the file name: ")
-                with open(file_name, 'r', encoding="utf-8") as f:
+                file_name = input("Enter the file name: ")
+                with open(file_name, "r") as f:
                     n = int(f.readline().strip())
                     data = list(map(int, f.readline().strip().split()))
                     assert len(data) == n
                     swaps = build_heap(data)
-                    print(len(swaps))
+                    print("Number of swaps:", len(swaps))
                     for i, j in swaps:
                         print(i, j)
                     break
             except FileNotFoundError:
-                print("File not found. Please enter a valid file name.")
+                print("File not found. Try again.")
     else:
-        print("Invalid input type. Please enter 'i' or 'f'.")
+        print("Invalid input type. Try again.")
+
 
 if __name__ == "__main__":
     main()
